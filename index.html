@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .bai1,.bai2{
+            width: 400px;
+            text-align: center;
+            margin: 40px auto;
+            border: 2px solid red;
+           
+        }
+       #change {
+           display: block;
+           padding: 10px;
+           font-size: 20px;
+       }
+        #s1,#s2,#kq {
+            padding: 10px;
+            display: block;
+            margin: 20px auto;
+        }
+        #calculator {
+           
+           color: red;
+            font-size: 25px;
+            padding: 10px;
+           
+        }
+        #cal {
+           padding: 10px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .bongden {
+            width: 200px;
+            height: 200px;
+            border: 3px solid black;
+            margin: 30px auto;
+            border-radius: 50%;
+            background-color: black;
+        }
+        .bai2 button {
+            width: 70px;
+            height: 70px;
+            display: block;
+            background-color: red;
+            color: white;
+            margin: 30px auto;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .bai3 {
+            border: 2px solid red;
+            width: 300px;
+            padding: 20px;
+            position: relative;
+           
+        }
+        .bai3 input {
+            padding: 15px;
+            width: 200px;
+            display: block;
+            margin: 0 auto;
+            
+            
+        }
+        .bai3 #show {
+            width: 30px;
+            display: inline-block;
+           position: absolute;
+           top: 100px;
+           right: 55px;
+            cursor: pointer;
+        }
+        @media only screen and (max-width:400px) {
+            #images,.bai1,.bai2,.bai3 {
+                max-width: 90%;
+            
+            }
+        }
+    </style>
+</head>
+<body>
+    <img src="anh1.jpg" alt="hinh anh" id="images">
+    <select name="" id="change" onchange="changeImages()">
+        <option value="anh1.jpg">Ảnh1</option>
+        <option value="anh2.jpg">Ảnh2</option>
+        <option value="anh3.jpg">Ảnh3</option>
+    </select>
+  <div class="bai1">
+          <h2>Tính toán</h2>
+            <input id="s1" type="number" placeholder="Nhập vào số a">
+            <select name="cal" id="calculator">
+                <option value="+">Cộng</option>
+                <option value="-">Trừ</option>
+                <option value="*">Nhân</option>
+                <option value="/">Chia</option>
+                <option value="%">Chia lấy dư</option>
+            </select>
+            <input id="s2" type="number" placeholder="Nhập vào số b">
+            <button id="cal" onclick="caculator()">Tính toán</button>
+            <input id="kq" type="text" value="">
+       
+  </div>
+  <div class="bai2">
+      <h2 id="h2">Bóng đèn đang tắt</h2>
+      <div id="bongden" class="bongden">
+
+      </div>
+      <button id="congtac" onclick="showHideLight()" value="off">OFF</button>
+  </div>
+  <div class="bai3">
+      <h2>Nhập vào mật khẩu của bạn</h2>
+      <input id="pass" type="password" placeholder="Nhập vào mật khẩu của bạn">
+      <div id="show" title="Hiện mật khẩu">
+        <img src="eye-solid.svg" onclick="showPassword()" alt="anh" width="30" >
+      </div>
+      
+  </div>
+    <script>
+         
+         
+        function changeImages(){
+            var img = document.getElementById('change').value;
+            document.getElementById('images').setAttribute('src',img);
+        }
+
+        function caculator(){
+            var s1 = document.getElementById('s1').value;
+            var s2 = document.getElementById('s2').value;
+           
+            var cal = document.getElementById('calculator').value;
+            var kq = 0 ;
+           switch (cal){
+               case '+':
+                   kq = parseInt(s1) + parseInt(s2);
+                   break;
+               case '-':
+                   kq = s1 - s2;
+                   break;
+                case '*':
+                   kq = s1 * s2;
+                   break;
+                case '/':
+                   kq = s1 / s2;
+                   break;
+                case '%':
+                   kq = s1 % s2;
+                   break;
+                   
+           }
+             
+           document.getElementById('kq').value = kq;   
+            
+        }
+
+        function showHideLight(){
+            var bongden = document.getElementById('bongden');
+            
+            var congtac = document.getElementById('congtac');
+            
+            var h2 = document.getElementById('h2');
+            switch(congtac.value){
+                case 'off':
+                bongden.style.backgroundColor = 'yellow';
+                congtac.style.backgroundColor = 'green';
+                congtac.innerHTML = 'ON';
+                congtac.value = 'on';
+                h2.innerHTML = 'Bóng đèn đang sáng';
+                break;
+                case 'on':
+                bongden.style.backgroundColor = 'black';
+                congtac.style.backgroundColor = 'red';
+                congtac.innerHTML = 'OFF';
+                congtac.value = 'off';
+                h2.innerHTML = 'Bóng đèn đang tắt';
+                break;
+            }
+           
+
+        }
+        function showPassword(){
+            var inp = document.getElementById('pass');
+            var pass = document.getElementById('show');
+ 
+           switch(pass.title){
+               case 'Hiện mật khẩu':
+                   inp.setAttribute('type','text');
+                   pass.title = 'Ẩn mật khẩu';
+                   break;
+               case 'Ẩn mật khẩu':
+                   inp.setAttribute('type','password');
+                   pass.title = 'Hiện mật khẩu';
+                   break;
+           }
+           
+           
+        }
+
+    </script>
+</body>
+</html>
